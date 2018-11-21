@@ -1,29 +1,62 @@
+https://sketchboard.me/FBkfcNuCdSkN#/
+
 SCOPE
 
-Take some page
-Get the html
-Update sitemap
-Parse all links, follow those links, and repeat
+crawler
+takes a list of urls
+!!! generates a reverse index
+output title and website snippet
+you don't need to crawl its links, just the list
 
-CONSTRAINTS
+searcher
+user inputs a term
+gets back pages containing term in any order
+imagine: search for an exact phrase
 
-One user
-Once a day
+OUT OF SCOPE
+Not personalised - no logins 
+No analytics.
+No ranking of results
 
-API
-/website/{name}/sitemap
-/website/page/{name}
+USERS CONSTRAINTS
+make 100 billion searches a month
+search for some things more than other
+want fresh results - we crawl once a week
+they crawl rich websites - 500k each crawl
+they want it to be fast and highly available 
+
+
+THROUGHPUT
+they have 1 billion links to search
+1600 writes per second
+40k searches per second
 
 SERVICES
 
 Scheduling
 Starts job
 
-Crawler
-make http request
-parse http and get links
-save that to object db
-check the graph service to see if crawled
+CRAWLER
+
+list links to crawl
+list of crawled links
+could use redis. can store 1b with no worries if you have memory
+!!! discuss tradeoffs here between SQL and noSQL. 
+
+How do we stop duplicates? 
+How do we know when to crawl? Can we keep a time stamp?
+Can we check if changed? 
+
+get something from crawl queue
+if crawled recenly, dump it
+if not, make http request
+parse http
+if changed, save that to object db
+add it to the crawled map with time last crawled
+
+
+DOCUMENT
+Stores title and snippet
 
 GraphService
 has it been crawled
@@ -41,4 +74,7 @@ DATABASE
 
 https://sketchboard.me/PBiQeK0kYtEK#/
 
-OPTIMIZATION
+SCALING
+
+How do we stop duplicates at 1 billion websites? 
+
