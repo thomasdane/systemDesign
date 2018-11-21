@@ -1,0 +1,49 @@
+Mint.com is a free, web-based personal financial management service, 
+that allows its users to integrate with financial accounts to automatically extract their data, 
+and manage their personal budget.
+
+Design a system like Mint.
+
+SCOPE
+
+integrates with bank
+can set reminders for bills
+some dashboards around spending patterns
+
+CONSTRAINTS
+security - does it need writes? like paying bills. or is it just read only?
+does it need to be real time?
+usage patterns? 
+
+
+DRAW
+
+client
+- see spending
+- see bills
+- see see balance
+- polls for new data
+
+server - several services
+
+financial account integrations. might have a separate service for each financial account. 
+they aggregate data into one service for consumption. 
+
+backed by DB - would want record of the raw data. store it in whatever format it comes back in. 
+Then start to use other services to transform it. This can be done in batch - how often though? 
+
+dashboard service - this serves data needed for dashboards. ordered, sorted, filtered etc. 
+
+could be graphql. backed by relational. 
+
+reminder service - bills due, balance is low, too much spending on blah. 
+cron jobs? time based DB. 
+
+scale
+500m users
+what is most accessed? what can we cache?
+
+
+
+
+

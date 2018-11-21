@@ -1,0 +1,31 @@
+scope
+
+client
+user enters a url, receives tiny url
+
+url generator service
+hashes url into a unique url on our domain
+checks cache or adds
+returns tiny url to client
+
+url mapping service
+auto create dns entry for tinyurl.com/123
+with a record that points to real one
+problem with dns - it is too slow to propogate
+could implement it on the webserver. a 301 or 302 redirect
+
+
+some stats and analytics around it
+most popular urls
+how many urls per day, second, hour
+store in relational db and query
+maybe a time based db for some things
+
+bottlenecks
+
+what if one url was super popular? received tons of hits
+we already know where it points
+we dont need to hit the db to check this
+worst case we can cache in memory at the origin
+better is to cache at cdn or in browser. this redirect could be done at dns level
+

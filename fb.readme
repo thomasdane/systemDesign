@@ -1,0 +1,22 @@
+500m active users per month
+many platforms - ios, android, mobile web, desktop
+build a logging infrastructure
+log things like start and stop, 
+key events, messages
+
+
+scope
+500 what does that mean? global or country?
+monthly - how does it look daily?
+
+constraints
+say global and 70% use every day
+work out concurrent users
+know the max throughput of node and iss
+
+
+high level
+
+each event fires off a small request
+each platform has own logging service that adds relvant data
+each platform sends logs to central log

@@ -1,0 +1,44 @@
+SCOPE
+
+Take some page
+Get the html
+Update sitemap
+Parse all links, follow those links, and repeat
+
+CONSTRAINTS
+
+One user
+Once a day
+
+API
+/website/{name}/sitemap
+/website/page/{name}
+
+SERVICES
+
+Scheduling
+Starts job
+
+Crawler
+make http request
+parse http and get links
+save that to object db
+check the graph service to see if crawled
+
+GraphService
+has it been crawled
+if not, add to queue
+otherwise do nothing
+
+DB
+object database
+relational
+
+DATABASE
+- Entire copy of page
+- Sitemap
+
+
+https://sketchboard.me/PBiQeK0kYtEK#/
+
+OPTIMIZATION
