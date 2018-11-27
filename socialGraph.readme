@@ -1,0 +1,63 @@
+SCOPE
+Users search by name or surname
+Show shortest path - Tom --> Michael --> Ashley --> Pasha --> Tom
+Highly available
+
+CONSTRAINTS
+100 million users (vertices)
+50 friends per user (edges 50 * 100 million)
+1 billion searches per month
+
+Speed
+Read heavy
+Once an hour
+How many times?
+
+USAGE
+
+Data storage
+How much does each user hold? 
+Doesn't fit on single machine
+
+Bandwidth
+400 requests per second
+Let's say cookie headers large and worst case 1kb requests
+400kb per second
+
+SERVICES
+
+User
+Search by name
+
+Web server
+Takes in terms and queries API
+
+Search API
+Takes query and checks cache
+Example Tom: [[Michael: Ashley]]
+BFS:
+assume we have a map of 'processed friends'
+call this function with input friend and parent of null
+if destination friend is the same as the input friend, return path
+get friends of input friend
+if processed already, drop them
+if not, mark them as processed with parent
+add to a queue
+get first friend from queue
+continue with new first friend or return if queue is empty
+
+Graph DB
+Stores graph
+
+
+Scaling
+
+!!What happens if we can't store all users on single machine?
+
+Lookup Service
+Finds the User Server where the user is located
+Gets user and does BFS
+Would need to do a lookup for each of the friends
+You could shard DB by location
+You could also store common lookups in memory - Kevin Bacon, mathematicians
+Set a timeout or do BFS from both directions
