@@ -1,0 +1,72 @@
+SCOPE
+
+Paste text up to 500k
+Generates URL lasts for 1 year
+Generates short url
+
+Users enter url and gets page contents
+
+Stats for page visits
+
+CONSTRAINTS
+10 million users
+10 million writes per month
+100 million reads per month
+Heavy on reads 10:1
+Highly available
+Location specific usage
+Document specific usage patterns
+
+10million writes
+4 writes per second
+
+100 million reads
+40 reads per second
+
+STORAGE
+500k per user
+10 million per month
+5PB per month
+
+BANDWIDTH
+
+Writes
+250Mb per second
+
+Reads
+2.5Gb per second
+
+SERVICES
+
+USER/CLIENT
+Upload text
+Receives a url
+Cache
+
+Web Server
+Reverse proxy
+
+APIs
+!!Write POST /document/
+!!Read GET /document/zx6!7
+
+Url service
+Generate hash for document
+!!What hash algo? MD5
+!!How eliminate special characters? Base 62 encode
+
+Document service
+Takes url, finds document, serves to user
+Could be backed by Key Value store. 
+
+SCALING
+
+CDN
+Cache common requests
+
+ELB
+Allows for multiple web servers
+
+Caching
+Redis in memory
+key is hash, value is content

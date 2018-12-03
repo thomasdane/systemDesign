@@ -60,4 +60,4 @@ Gets user and does BFS
 Would need to do a lookup for each of the friends
 You could shard DB by location
 You could also store common lookups in memory - Kevin Bacon, mathematicians
-Set a timeout or do BFS from both directions
+Set a timeout/max depth or do BFS from both directions
